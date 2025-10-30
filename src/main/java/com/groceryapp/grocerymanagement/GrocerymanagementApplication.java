@@ -8,6 +8,7 @@ public class GrocerymanagementApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GrocerymanagementApplication.class, args);
+		
 	}
 
 }
