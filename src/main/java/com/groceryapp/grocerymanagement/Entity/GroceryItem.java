@@ -1,4 +1,4 @@
-    package com.groceryapp.grocerymanagement.Entity;
+    package com.groceryapp.grocerymanagement.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class GroceryItem {
     private String category;
     private Double price;
     private Integer quantity;
-    
+
     @ToString.Exclude
     @OneToMany(mappedBy = "groceryItem")
     private List<OrderItem> orderItems = new ArrayList<>();

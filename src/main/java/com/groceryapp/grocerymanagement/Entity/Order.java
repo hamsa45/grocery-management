@@ -1,4 +1,4 @@
-package com.groceryapp.grocerymanagement.Entity;
+package com.groceryapp.grocerymanagement.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

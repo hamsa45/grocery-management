@@ -1,4 +1,4 @@
-package com.groceryapp.grocerymanagement.Entity;
+package com.groceryapp.grocerymanagement.entity;
 
 import java.util.ArrayList;
 import java.util.List;
