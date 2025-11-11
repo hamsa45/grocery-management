@@ -32,7 +32,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto getCustomerById(Long id) {
         // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'getCustomerById'");
         Customer customer = customerRepository.findById(id)
             .orElseThrow(
                 () -> new RuntimeException("Customer not found with id: " + id)
@@ -49,16 +48,14 @@ public class CustomerServiceImpl implements CustomerService {
             customerDtos.add(CustomerMapper.toDto(customer));
         }
         return customerDtos;
-        //
-        //throw new UnsupportedOperationException("Unimplemented method 'getAllCustomers'");
     }
 
     @Override
     public CustomerDto updateCustomer(Long id, CustomerDto customerDto) {
         // TODO Auto-generated method stub
-        Customer existingCustomer = customerRepository.findById(id)
-            .orElseThrow(
-                () -> new RuntimeException("Customer not found with id: " + id)
+        Customer existingCustomer = customerRepository
+            .findById(id)
+            .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id)
             );
 
         existingCustomer.setName(customerDto.getName());
@@ -70,13 +67,15 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.save(existingCustomer)
         );
         return updatedCustomerDto;
-        //throw new UnsupportedOperationException("Unimplemented method 'updateCustomer'");
     }
 
     @Override
     public void deleteCustomer(Long id) {
         // TODO Auto-generated method stub
+        Customer existingCustomer = customerRepository.findById(id)
+            .orElseThrow(
+                () -> new RuntimeException("Customer not found with id: " + id)
+            );
         customerRepository.deleteById(id);
-        //throw new UnsupportedOperationException("Unimplemented method 'deleteCustomer'");
     }
 }
