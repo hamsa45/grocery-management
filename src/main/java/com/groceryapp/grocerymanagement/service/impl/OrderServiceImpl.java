@@ -108,4 +108,62 @@ public class OrderServiceImpl implements OrderService {
         return mapToOrderResponseDto(order);
     }
     
+    @Override
+    public List<OrderResponseDto> getAllOrders() {
+        // TODO Auto-generated method stub
+        List<Order> orders = orderRepository.findAll();
+        List<OrderResponseDto> orderDtos = new ArrayList<>();
+        for (Order order : orders) {
+            orderDtos.add(mapToOrderResponseDto(order));
+        }
+        return orderDtos;
+    }
+
+    @Override
+    public void deleteOrderById(Long id) {
+        // TODO Auto-generated method stub
+        Order existingOrder = orderRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Order not found with id: " + id)
+            );
+        orderRepository.delete(existingOrder);
+    }
+
+    @Override
+    public OrderResponseDto updateOrder(Long id, OrderRequestDto orderRequest) {
+        // TODO Auto-generated method stub
+        Order existingOrder = orderRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Order not found with id: " + id)
+            );
+
+        // For simplicity, only updating order items here
+        existingOrder.getItems().clear();
+        Double totalPrice = 0.0;
+
+        for (OrderItemRequestDto orderItemRequestDto : orderRequest.getOrderItems()) {
+            GroceryItem item = groceryItemRepository
+                .findById(orderItemRequestDto.getGroceryItemById())
+                .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + orderItemRequestDto.getGroceryItemById()));
+
+            if (item.getQuantity() < orderItemRequestDto.getQuantity()) {
+                throw new RuntimeException("Insufficient quantity for item id: " + orderItemRequestDto.getGroceryItemById());
+            }
+
+            // Deduct the quantity from inventory
+            item.setQuantity(item.getQuantity() - orderItemRequestDto.getQuantity());
+
+            totalPrice += item.getPrice() * orderItemRequestDto.getQuantity();
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setGroceryItem(item);
+            orderItem.setQuantity(orderItemRequestDto.getQuantity());
+            orderItem.setPriceAtOrder(item.getPrice());
+            existingOrder.addItem(orderItem);
+        }
+
+        existingOrder.setTotalPrice(totalPrice);
+
+        Order updatedOrder = orderRepository.save(existingOrder);
+
+        return mapToOrderResponseDto(updatedOrder);
+    }
 }
