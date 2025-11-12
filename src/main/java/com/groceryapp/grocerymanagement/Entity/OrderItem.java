@@ -25,7 +25,7 @@ public class OrderItem {
     private Double priceAtOrder;
 
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+    // public void setOrder(Order order) {
+    //     this.order = order;
+    // }
 }

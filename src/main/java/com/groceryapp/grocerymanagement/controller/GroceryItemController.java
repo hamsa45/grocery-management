@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -29,7 +31,7 @@ public class GroceryItemController {
     public ResponseEntity<GroceryItemDto> addGroceryItem(@RequestBody GroceryItemDto groceryItemDto){
         // Implementation for adding a grocery item
         GroceryItemDto item = groceryItemService.addGroceryItem(groceryItemDto);
-        return ResponseEntity.ok(item);
+        return ResponseEntity.status(HttpStatus.CREATED).body(item);
     }
 
     @GetMapping("/{id}")

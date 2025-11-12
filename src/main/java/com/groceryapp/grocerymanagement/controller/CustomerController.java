@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.groceryapp.grocerymanagement.service.CustomerService;
 import com.groceryapp.grocerymanagement.dto.CustomerDto;
@@ -29,7 +30,9 @@ public class CustomerController {
     //add customer-related endpoints here
     @PostMapping
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto){
-        return ResponseEntity.ok(customerService.createCustomer(customerDto));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(customerService.createCustomer(customerDto));
     }
 
     @GetMapping("/{id}")
