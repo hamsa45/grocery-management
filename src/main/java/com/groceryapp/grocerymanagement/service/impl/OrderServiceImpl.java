@@ -53,11 +53,11 @@ public class OrderServiceImpl implements OrderService {
             //find if the item exists, if exists required quantity is available
             //OrderItemResponseDto orderItemResponseDto = new OrderItemResponseDto();
             GroceryItem item = groceryItemRepository
-                .findById(orderItemRequestDto.getGroceryItemById())
-                .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + orderItemRequestDto.getGroceryItemById()));
+                .findById(orderItemRequestDto.getGroceryItemId())
+                .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + orderItemRequestDto.getGroceryItemId()));
 
             if (item.getQuantity() < orderItemRequestDto.getQuantity()) {
-                throw new RuntimeException("Insufficient quantity for item id: " + orderItemRequestDto.getGroceryItemById());
+                throw new RuntimeException("Insufficient quantity for item id: " + orderItemRequestDto.getGroceryItemId());
             }
             
             // Deduct the quantity from inventory
@@ -66,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
             totalPrice += item.getPrice() * orderItemRequestDto.getQuantity();
 
             OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
             orderItem.setGroceryItem(item);
             orderItem.setQuantity(orderItemRequestDto.getQuantity());
             orderItem.setPriceAtOrder(item.getPrice());
@@ -92,6 +93,9 @@ public class OrderServiceImpl implements OrderService {
             itemDto.setGroceryItemId(item.getGroceryItem().getId());
             itemDto.setQuantity(item.getQuantity());
             itemDto.setPriceAtOrder(item.getPriceAtOrder());
+            Double totalItemPrice = item.getPriceAtOrder() * item.getQuantity();
+            itemDto.setTotalItemPrice(totalItemPrice);
+            itemDto.setItemName(item.getGroceryItem().getName());
             itemDtos.add(itemDto);
         }
         dto.setOrderItems(itemDtos);
@@ -141,11 +145,11 @@ public class OrderServiceImpl implements OrderService {
 
         for (OrderItemRequestDto orderItemRequestDto : orderRequest.getOrderItems()) {
             GroceryItem item = groceryItemRepository
-                .findById(orderItemRequestDto.getGroceryItemById())
-                .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + orderItemRequestDto.getGroceryItemById()));
+                .findById(orderItemRequestDto.getGroceryItemId())
+                .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + orderItemRequestDto.getGroceryItemId()));
 
             if (item.getQuantity() < orderItemRequestDto.getQuantity()) {
-                throw new RuntimeException("Insufficient quantity for item id: " + orderItemRequestDto.getGroceryItemById());
+                throw new RuntimeException("Insufficient quantity for item id: " + orderItemRequestDto.getGroceryItemId());
             }
 
             // Deduct the quantity from inventory

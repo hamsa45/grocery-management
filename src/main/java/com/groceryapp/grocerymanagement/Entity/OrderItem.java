@@ -16,9 +16,11 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "grocery_item_id")
     private GroceryItem groceryItem;
 
     private Integer quantity;

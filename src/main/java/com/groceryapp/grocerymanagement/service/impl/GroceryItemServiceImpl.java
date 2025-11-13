@@ -30,9 +30,11 @@ public class GroceryItemServiceImpl implements GroceryItemService {
         return GroceryMapper.toDto(groceryItem);
     }
 
-    public GroceryItemDto updateGroceryItem(GroceryItemDto groceryItemDto){
-        GroceryItem existingGroceryItem = groceryItemRepository.findById(groceryItemDto.getId())
-            .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + groceryItemDto.getId()));
+    public GroceryItemDto updateGroceryItem(Long id, GroceryItemDto groceryItemDto){
+        GroceryItem existingGroceryItem = groceryItemRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Grocery item not found with id: " + id));
+
+        existingGroceryItem.setId(id);
         existingGroceryItem.setName(groceryItemDto.getName());
         existingGroceryItem.setCategory(groceryItemDto.getCategory());
         existingGroceryItem.setPrice(groceryItemDto.getPrice());

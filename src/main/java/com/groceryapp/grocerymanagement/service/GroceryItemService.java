@@ -9,6 +9,6 @@ public interface GroceryItemService {
     GroceryItemDto addGroceryItem(GroceryItemDto groceryItemDto);
     GroceryItemDto getGroceryItemById(Long id);
     List<GroceryItemDto> getAllGroceryItems();
-    GroceryItemDto updateGroceryItem(GroceryItemDto groceryItemDto);
+    GroceryItemDto updateGroceryItem(Long id, GroceryItemDto groceryItemDto);
     void deleteGroceryItemById(Long id);
 }

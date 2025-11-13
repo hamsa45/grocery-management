@@ -53,7 +53,7 @@ public class GroceryItemController {
     @PutMapping("/{id}")
     public ResponseEntity<GroceryItemDto> updateGroceryItem(@PathVariable Long id, @RequestBody GroceryItemDto groceryItemDto){
         // Implementation for updating a grocery item
-        GroceryItemDto updatedItem = groceryItemService.updateGroceryItem(groceryItemDto);
+        GroceryItemDto updatedItem = groceryItemService.updateGroceryItem(id, groceryItemDto);
         return ResponseEntity.ok(updatedItem);
     }
 
