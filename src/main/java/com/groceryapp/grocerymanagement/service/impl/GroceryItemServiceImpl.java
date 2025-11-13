@@ -2,17 +2,19 @@ package com.groceryapp.grocerymanagement.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.groceryapp.grocerymanagement.dto.GroceryItemDto;
 import com.groceryapp.grocerymanagement.entity.GroceryItem;
 import com.groceryapp.grocerymanagement.mapper.GroceryMapper;
 import com.groceryapp.grocerymanagement.repository.GroceryItemRepository;
+import com.groceryapp.grocerymanagement.service.GroceryItemService;
 
 @Service
-public class GroceryItemServiceImpl {
+public class GroceryItemServiceImpl implements GroceryItemService {
     private GroceryItemRepository groceryItemRepository;
-
+    @Autowired
     public GroceryItemServiceImpl(GroceryItemRepository groceryItemRepository){
         this.groceryItemRepository = groceryItemRepository;
     }

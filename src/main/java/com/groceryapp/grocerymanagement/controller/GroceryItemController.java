@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,9 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api/grocery-items")
 public class GroceryItemController {
-    private final GroceryItemService groceryItemService;
 
+    private final GroceryItemService groceryItemService;
+    @Autowired
     public GroceryItemController(GroceryItemService groceryItemService) {
         this.groceryItemService = groceryItemService;
     }

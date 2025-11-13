@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final GroceryItemRepository groceryItemRepository;
-    @Autowired
+    
     public OrderServiceImpl(OrderRepository orderRepository,
                             CustomerRepository customerRepository,
                             GroceryItemRepository groceryItemRepository) {
