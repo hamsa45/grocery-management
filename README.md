@@ -124,7 +124,7 @@ Before running this application, make sure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/grocerymanagement.git
+git clone https://github.com/hamsa45/grocerymanagement.git
 cd grocerymanagement
 ```
 
@@ -298,11 +298,11 @@ Test reports will be generated in `build/reports/tests/test/index.html`
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Abhilash H**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+- GitHub: [@hamsa45](https://github.com/hamsa45)
+- LinkedIn: [Abhilash H](https://linkedin.com/in/abhilash-h45/)
+- Email: abhilashabhi079@gmail.com
 
 ---
 
